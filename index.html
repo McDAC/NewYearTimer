@@ -3,15 +3,218 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Таймер до Нового Года</title>
+    <title>Новогодний Таймер</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0d2340 0%, #081425 100%);
+            font-family: 'Roboto Mono', monospace;
+            color: #fff;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: #fff;
+            font-size: 1.5rem;
+            opacity: 0.8;
+            user-select: none;
+            z-index: -1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 930px;
+            width: 100%;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: "Exo 2", sans-serif;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #fff;
+            text-shadow: 0 0 15px rgba(250, 201, 132, 0.7);
+            letter-spacing: 1px;
+        }
+
+        .highlight {
+            color: #fac984;
+            text-shadow: 0 0 10px rgba(250, 201, 132, 0.9);
+        }
+
+        .time-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .time-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 5px;
+        }
+
+        .time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-value {
+            font-size: 5.5rem;
+            color: #fac984;
+            font-weight: 200;
+            min-width: 100px;
+            text-shadow: 0 0 20px rgba(250, 201, 132, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .time-label {
+            margin-top: 15px;
+            font-size: 1rem;
+            color: #a0c3e0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .colon {
+            font-size: 4.5rem;
+            color: #fac984;
+            margin: 0 10px;
+            min-width: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 5.5rem;
+            padding-bottom: 1.2rem;
+            box-sizing: border-box;
+            text-shadow: 0 0 15px rgba(250, 201, 132, 0.5);
+        }
+
+        /* Анимации пульсации */
+        .pulse-slow {
+            animation: pulse-slow 2s infinite;
+        }
+
+        .pulse-fast {
+            animation: pulse-fast 1s infinite;
+        }
+
+        @keyframes pulse-slow {
+            0% { opacity: 1; text-shadow: 0 0 20px rgba(250, 201, 132, 0.9); }
+            50% { opacity: 0.7; text-shadow: 0 0 5px rgba(250, 201, 132, 0.4); }
+            100% { opacity: 1; text-shadow: 0 0 20px rgba(250, 201, 132, 0.9); }
+        }
+
+        @keyframes pulse-fast {
+            0% { opacity: 1; text-shadow: 0 0 20px rgba(250, 201, 132, 0.9); }
+            50% { opacity: 0.8; text-shadow: 0 0 7px rgba(250, 201, 132, 0.5); }
+            100% { opacity: 1; text-shadow: 0 0 20px rgba(250, 201, 132, 0.9); }
+        }
+
+        .footer {
+            margin-top: 50px;
+            color: #a0c3e0;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .new-year-text {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #fac984;
+            text-shadow: 0 0 10px rgba(250, 201, 132, 0.7);
+        }
+
+        /* Адаптивность */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .time-value {
+                font-size: 4rem;
+                min-width: 80px;
+            }
+
+            .colon {
+                font-size: 3.2rem;
+                height: 4.5rem;
+                padding-bottom: 1rem;
+            }
+
+            .time-label {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .time-value {
+                font-size: 2.8rem;
+                min-width: 60px;
+            }
+
+            .colon {
+                font-size: 2.2rem;
+                height: 3.5rem;
+                padding-bottom: 0.8rem;
+                margin: 0 5px;
+            }
+
+            .time-label {
+                font-size: 0.9rem;
+                letter-spacing: 1px;
+            }
+
+            .container {
+                padding: 25px 15px;
+            }
+
+            .new-year-text {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>До Нового Года осталось:</h1>
+        <h1>До <span class="highlight">Нового Года</span> осталось:</h1>
 
         <div class="time-container">
             <div class="time-block">
@@ -20,6 +223,8 @@
                 </div>
                 <div class="time-label">Дней</div>
             </div>
+
+            <span class="colon">&nbsp;</span>
 
             <div class="time-block">
                 <div class="time">
@@ -47,8 +252,59 @@
             </div>
         </div>
 
+        <div class="new-year-text">С наступающим 2025 годом! 🎄✨</div>
+
     </div>
 
-    <script src="timer.js"></script>
+    <script>
+        // Создание снежинок
+        function createSnowflakes() {
+            const snowContainer = document.body;
+            const snowflakeSymbols = ["❄", "❅", "❆", "✻", "✼", "❉"];
+
+            for (let i = 0; i < 50; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.textContent = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                snowflake.style.animationDelay = Math.random() * 5 + 's';
+                snowflake.style.opacity = Math.random() * 0.5 + 0.3;
+                snowflake.style.fontSize = (Math.random() * 15 + 10) + 'px';
+
+                snowContainer.appendChild(snowflake);
+            }
+        }
+
+        // Функция обратного отсчета ДО НОВОГО ГОДА
+        function countDown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const nextYear = currentYear + 1;
+            const newYearDate = new Date(`January 1, ${nextYear} 00:00:00`);
+            
+            const diff = newYearDate - now;
+            
+            // Расчет дней, часов, минут и секунд
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            // Обновляем отображение
+            document.getElementById('days').innerHTML = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerHTML = seconds.toString().padStart(2, '0');
+        }
+
+        // Запускаем снежинки и таймер
+        createSnowflakes();
+
+        // Запускаем сразу и затем каждую секунду
+        countDown();
+        setInterval(countDown, 1000);
+    </script>
 </body>
 </html>
